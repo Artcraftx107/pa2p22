@@ -1,7 +1,5 @@
 package practica_22
 
-import scala.annotation.tailrec
-import scala.collection.mutable.ArrayBuffer
 
 class EfficientQueue[T](front: List[T], rear: List[T]) extends ImmutableQueue[T] {
   def this() = this(List(), List()) //Inicializamos constructor vacio
@@ -24,8 +22,18 @@ class EfficientQueue[T](front: List[T], rear: List[T]) extends ImmutableQueue[T]
 
   override def isEmpty: Boolean = front.isEmpty && rear.isEmpty
 
-  // **A IMPLEMENTAR AUN**
-  // override def toString: String =
+   override def toString: String =
+     val frontString = front.mkString("Lista(", ", ", "")
+     val rearString = rear.mkString("", ", ", ")")
+     val finalString = s"$frontString$rearString"
+
+     finalString
+
+  override def equals(obj: Any): Boolean = obj match
+    case that: EfficientQueue[T] => this.toString.equals(that.toString)
+    case _ => false
+
+  override def hashCode(): Int = front.hashCode()+rear.hashCode()
 }
 
 @main def testEfficientQueue(): Unit = {
